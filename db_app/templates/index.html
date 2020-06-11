@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script type="text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/d3/5.16.0/d3.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  </head>
+  <body>
+    <div class="header">
+      <h1>Add Info</h1>
+      <h3>and see it appear!</h3>
+    </div>
+    <hr>
+    <div class = "add-info">
+      <form action="{{ url_for('update_db') }}" method="POST">
+        <div class="">
+          <label for="name">Name</label><input type="text" name ="name" id = "name">
+          <label for="hobby">Hobby</label><input type="text" name = "hobby" id = "hobby">
+          <label for="age">Age</label><input type="text" name = "age" id = "age">
+          <br>
+          <br>
+        </div>
+        <div class="" style = "text-align: center">
+          <button type="submit">Submit</button>
+        </div>
+        <br>
+        <br>
+      </form>
+    </div>
+    <hr>
+
+    <div class="data-container">
+      {% for person in results %}
+      <p class = "person"> My name is {{ person.name }}. My hobby is {{ person.hobby }}, and I am {{ person.age }} years old. </p>
+      {% endfor %}
+    </div>
+    <h3><a href="{{ url_for('show_plot') }}">Click Me!</a></h3>
+    <div id = "plot"></div>
+
+    <script type="text/javascript" src = "{{ url_for('static', filename = 'js/app.js') }}"></script>
+  </body>
+</html>
